@@ -4,6 +4,9 @@ IFS='\n\t'
 
 # ───── Voraussetzungen ─────
 command -v dialog >/dev/null 2>&1 || sudo dnf install -y dialog
+command -v dialog >/dev/null 2>&1 || sudo dnf install -y dialog
+command -v wget >/dev/null 2>&1 || sudo dnf install -y wget
+command -v unzip >/dev/null 2>&1 || sudo dnf install -y unzip
 
 # ───── Hilfsfunktionen ─────
 check_install() {
@@ -138,7 +141,7 @@ do_GPU_Driver_Nvidia() {
 
 do_extras() {
   echo "=> Weitere Programme"
-  sudo dnf install btop obs-studio java-latest-openjdk java-latest-openjdk-devel krita fastfetch steam lutris alacritty kitty stow -y
+  sudo dnf install btop obs-studio java-latest-openjdk java-latest-openjdk-devel krita fastfetch steam lutris alacritty stow -y
 }
 
 do_brave_code() {
@@ -147,6 +150,11 @@ do_brave_code() {
   sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo' 
   sudo dnf check-update -y
   sudo dnf install code -y
+  echo "Brave"
+  sudo dnf install dnf-plugins-core -y
+  sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo -y
+  sudo dnf install brave-browser -y
+
 }
 
 do_theme() {
@@ -178,7 +186,7 @@ while true; do
     7 "Brave & Visual Studio Code" \
     8 "KDE Theming anwenden" \
     9 "Alles installieren (ohne Gaming)" \
-    10 "GPU-Treiber" \ 
+    10 "GPU-Treiber" \
     0 "Beenden" 2>&1 >/dev/tty)
 
   clear
@@ -197,6 +205,6 @@ while true; do
   esac
 
   echo "\nDrücke eine Taste, um zurück zum Menü zu gelangen..."
-  read dummy
+  read -n1 -r -p ""
 
 done
