@@ -89,7 +89,7 @@ echo "Installing Git and Zsh..."
 sudo dnf install git zsh -y
 
 echo "Setting Zsh as default shell..."
-chsh -s $(which zsh)
+chsh -s "$(command -v zsh)"
 
 echo "Preparing Zsh plugins..."
 touch ~/.zshrc
