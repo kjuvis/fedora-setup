@@ -7,6 +7,47 @@ command -v dialog >/dev/null 2>&1 || sudo dnf install -y dialog
 command -v wget >/dev/null 2>&1 || sudo dnf install -y wget
 command -v unzip >/dev/null 2>&1 || sudo dnf install -y unzip
 
+echo "install zsh weil sauer auf script hier"
+echo "🛠️ Installing Git and Zsh..."
+sudo dnf install git zsh -y
+
+echo "🔁 setting zsh as default shell"
+sudo chsh -s "$(which zsh)" "$USER"
+
+echo "💡 Preparing Zsh plugins..."
+touch ~/.zshrc
+mkdir -p ~/.zsh/plugins
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-completions ~/.zsh/plugins/zsh-completions
+
+echo "📜 Updating .zshrc with plugin configuration..."
+cat << 'EOF' >> ~/.zshrc
+
+# Plugin Paths
+fpath+=~/.zsh/plugins/zsh-completions
+
+# Load Plugins
+source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+autoload -Uz compinit && compinit
+EOF
+
+echo "🔤 Installing FiraCode Nerd Font..."
+mkdir -p ~/.local/share/fonts
+wget -O ~/.local/share/fonts/FiraCode.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+unzip -o ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/FiraCode
+fc-cache -fv
+
+echo "🚀 Installing Starship prompt..."
+curl -sS https://starship.rs/install.sh | sh -s -- -y
+
+echo "🎨 Applying Catppuccin Powerline Starship preset..."
+mkdir -p ~/.config
+starship preset catppuccin-powerline -o ~/.config/starship.toml
+echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+
 # ───── Hilfsfunktionen ─────
 check_install() {
   pkg="$1"
@@ -84,48 +125,6 @@ do_flatpak() {
     com.github.IsmaelMartinez.teams_for_linux
 }
 
-do_zsh() {
-echo "🛠️ Installing Git and Zsh..."
-sudo dnf install git zsh -y
-
-echo "🔁 setting zsh as default shell"
-sudo chsh -s "$(which zsh)" "$USER"
-
-echo "💡 Preparing Zsh plugins..."
-touch ~/.zshrc
-mkdir -p ~/.zsh/plugins
-
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-completions ~/.zsh/plugins/zsh-completions
-
-echo "📜 Updating .zshrc with plugin configuration..."
-cat << 'EOF' >> ~/.zshrc
-
-# Plugin Paths
-fpath+=~/.zsh/plugins/zsh-completions
-
-# Load Plugins
-source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-autoload -Uz compinit && compinit
-EOF
-
-echo "🔤 Installing FiraCode Nerd Font..."
-mkdir -p ~/.local/share/fonts
-wget -O ~/.local/share/fonts/FiraCode.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
-unzip -o ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/FiraCode
-fc-cache -fv
-
-echo "🚀 Installing Starship prompt..."
-curl -sS https://starship.rs/install.sh | sh -s -- -y
-
-echo "🎨 Applying Catppuccin Powerline Starship preset..."
-mkdir -p ~/.config
-starship preset catppuccin-powerline -o ~/.config/starship.toml
-echo 'eval "$(starship init zsh)"' >> ~/.zshrc
-}
-
 do_codecs() {
   echo "=> Aktivieren von Cisco OpenH264-Repo"
   sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
@@ -168,7 +167,6 @@ do_all() {
   do_system
   remove_gnome
   do_flatpak
-  do_zsh
   do_codecs
   do_extras
   do_brave_code
@@ -182,7 +180,6 @@ while true; do
     --menu "Wähle, was installiert werden soll:" 20 60 12 \
     1 "Systemupdate + RPM Fusion" \
     2 "Flatpak-Programme" \
-    3 "Zsh, Plugins, Font, Starship" \
     4 "Multimedia-Codecs" \
     5 "Alacritty Konfiguration kopieren" \
     6 "Weitere Programme" \
@@ -196,7 +193,6 @@ while true; do
   case "$CHOICE" in
     1) do_system ;;
     2) do_flatpak ;;
-    3) do_zsh ;;
     4) do_codecs ;;
     5) install_alacritty_config ;;
     6) do_extras ;;
