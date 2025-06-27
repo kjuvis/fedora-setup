@@ -90,7 +90,6 @@ sudo dnf install git zsh -y
 
 echo "⚙️ Setting Zsh as default shell..."
 chsh -s $(which zsh)
-chsh -s $(which zsh)
 
 echo "💡 Preparing Zsh plugins..."
 touch ~/.zshrc
