@@ -85,13 +85,13 @@ do_flatpak() {
 }
 
 do_zsh() {
-echo "Installing Git and Zsh..."
+echo "🛠️ Installing Git and Zsh..."
 sudo dnf install git zsh -y
 
-echo "Setting Zsh as default shell..."
-chsh -s "$(command -v zsh)"
+echo "⚙️ Setting Zsh as default shell..."
+chsh -s $(which zsh)
 
-echo "Preparing Zsh plugins..."
+echo "💡 Preparing Zsh plugins..."
 touch ~/.zshrc
 mkdir -p ~/.zsh/plugins
 
@@ -99,7 +99,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/plugins/zsh-au
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-completions ~/.zsh/plugins/zsh-completions
 
-echo "Updating .zshrc with plugin configuration..."
+echo "📜 Updating .zshrc with plugin configuration..."
 cat << 'EOF' >> ~/.zshrc
 
 # Plugin Paths
@@ -111,16 +111,16 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -Uz compinit && compinit
 EOF
 
-echo "Installing FiraCode Nerd Font..."
+echo "🔤 Installing FiraCode Nerd Font..."
 mkdir -p ~/.local/share/fonts
 wget -O ~/.local/share/fonts/FiraCode.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
 unzip -o ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/FiraCode
 fc-cache -fv
 
-echo "Installing Starship prompt..."
+echo "🚀 Installing Starship prompt..."
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 
-echo "Applying Catppuccin Powerline Starship preset..."
+echo "🎨 Applying Catppuccin Powerline Starship preset..."
 mkdir -p ~/.config
 starship preset catppuccin-powerline -o ~/.config/starship.toml
 echo 'eval "$(starship init zsh)"' >> ~/.zshrc
