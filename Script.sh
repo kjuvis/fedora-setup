@@ -88,8 +88,8 @@ do_zsh() {
 echo "🛠️ Installing Git and Zsh..."
 sudo dnf install git zsh -y
 
-echo "⚙️ Setting Zsh as default shell..."
-chsh -s $(which zsh)
+echo "🔁 setting zsh as default shell"
+sudo chsh -s "$(which zsh)" "$USER"
 
 echo "💡 Preparing Zsh plugins..."
 touch ~/.zshrc
