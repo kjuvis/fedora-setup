@@ -11,8 +11,8 @@ echo "install zsh weil sauer auf script hier"
 echo "🛠️ Installing Git and Zsh..."
 sudo dnf install git zsh -y
 
-echo "🔁 setting zsh as default shell"
-sudo chsh -s "$(which zsh)" "$USER"
+echo "⚙️ Setting Zsh as default shell..."
+chsh -s $(which zsh)
 
 echo "💡 Preparing Zsh plugins..."
 touch ~/.zshrc
