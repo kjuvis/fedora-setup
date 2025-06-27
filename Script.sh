@@ -4,7 +4,6 @@ IFS='\n\t'
 
 # ───── Voraussetzungen ─────
 command -v dialog >/dev/null 2>&1 || sudo dnf install -y dialog
-command -v dialog >/dev/null 2>&1 || sudo dnf install -y dialog
 command -v wget >/dev/null 2>&1 || sudo dnf install -y wget
 command -v unzip >/dev/null 2>&1 || sudo dnf install -y unzip
 
@@ -185,7 +184,7 @@ while true; do
     6 "Weitere Programme" \
     7 "Brave & Visual Studio Code" \
     8 "KDE Theming anwenden" \
-    9 "Alles installieren (ohne Gaming)" \
+    9 "Alles installieren (ohne GPU-Treiber)" \
     10 "GPU-Treiber" \
     0 "Beenden" 2>&1 >/dev/tty)
 
