@@ -23,7 +23,7 @@ This repository contains scripts and configurations for quickly setting up a Fed
 
 2. Run the main setup script:
 
-   ./setup.sh
+   sudo sh Script.sh
 
 3. Follow the on-screen instructions. The scripts will automatically install and configure various packages and settings.
 
