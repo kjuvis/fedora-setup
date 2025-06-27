@@ -48,6 +48,13 @@ apply_kde_theme() {
   echo "KDE-Theming angewendet. Abmelden/Neustart empfohlen."
 }
 
+install_alacritty_config() {
+  echo "=> Installiere Alacritty-Konfiguration..."
+  mkdir -p ~/.config/alacritty
+  cp ./config/alacritty/alacritty.yml ~/.config/alacritty/
+  echo "✓ Alacritty-Konfiguration kopiert."
+}
+
 do_system() {
   echo "=> Systemupdate & DNF-Konfiguration"
   sudo dnf -y update
@@ -181,12 +188,13 @@ do_all() {
   do_extras
   do_brave_code
   do_theme
+  install_alacritty_config
 }
 
 # ───── Menü mit dialog ─────
 while true; do
   CHOICE=$(dialog --clear --backtitle "Fedora KDE Post‑Install" \
-    --menu "Wähle, was installiert werden soll:" 20 60 11 \
+    --menu "Wähle, was installiert werden soll:" 20 60 12 \
     1 "Systemupdate + RPM Fusion" \
     2 "Flatpak-Programme" \
     3 "Zsh, Plugins, Font, Starship" \
@@ -196,6 +204,7 @@ while true; do
     7 "Brave & Visual Studio Code" \
     8 "KDE Theming anwenden" \
     9 "Alles installieren (ohne Gaming)" \
+    10 "Alacritty Konfiguration kopieren" \
     0 "Beenden" 2>&1 >/dev/tty)
 
   clear
@@ -209,6 +218,7 @@ while true; do
     7) do_brave_code ;;
     8) do_theme ;;
     9) do_all ;;
+    10) install_alacritty_config ;;
     0) echo "Skript beendet. Viel Spaß mit Fedora KDE!" ; exit 0 ;;
   esac
 
