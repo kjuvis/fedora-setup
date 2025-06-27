@@ -127,49 +127,26 @@ do_codecs() {
   sudo dnf swap ffmpeg-free ffmpeg --allowerasing -y
 }
 
-do_gaming() {
-  echo "=> Gaming Tools und NVIDIA-Treiber"
-  check_install steam
-  check_install lutris
+do_GPU_Driver_Nvidia() {
+  echo "=> NVIDIA-Treiber"
   dialog --yesno "NVIDIA-Treiber installieren?" 7 50
   if [ "$?" -eq 0 ]; then
-    check_install akmod-nvidia
-    check_install xorg-x11-drv-nvidia-cuda
+    sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda -y
+    
   fi
 }
 
 do_extras() {
   echo "=> Weitere Programme"
-  check_install btop
-  check_install obs-studio
-  check_install java-latest-openjdk
-  check_install java-latest-openjdk-devel
-  check_install krita
-  check_install fastfetch
-  check_install alacritty
-  check_install kitty
-  check_install stow
+  sudo dnf install btop obs-studio java-latest-openjdk java-latest-openjdk-devel krita fastfetch steam lutris alacritty kitty stow -y
 }
 
 do_brave_code() {
-  echo "=> Brave & VS Code"
-  check_install dnf-plugins-core
-  sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-  check_install brave-browser
-
-  if ! rpm -q code >/dev/null 2>&1; then
-    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-    sudo sh -c 'cat > /etc/yum.repos.d/vscode.repo' <<EOF
-[code]
-name=Visual Studio Code
-baseurl=https://packages.microsoft.com/yumrepos/vscode
-enabled=1
-gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc
-EOF
-    sudo dnf check-update
-    sudo dnf install -y code
-  fi
+  echo "VS-Code"
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc 
+  sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo' 
+  sudo dnf check-update -y
+  sudo dnf install code -y
 }
 
 do_theme() {
@@ -196,12 +173,12 @@ while true; do
     2 "Flatpak-Programme" \
     3 "Zsh, Plugins, Font, Starship" \
     4 "Multimedia-Codecs" \
-    5 "Gaming & GPU-Treiber" \
+    5 "Alacritty Konfiguration kopieren" \
     6 "Weitere Programme" \
     7 "Brave & Visual Studio Code" \
     8 "KDE Theming anwenden" \
     9 "Alles installieren (ohne Gaming)" \
-    10 "Alacritty Konfiguration kopieren" \
+    10 "GPU-Treiber" \ 
     0 "Beenden" 2>&1 >/dev/tty)
 
   clear
@@ -210,12 +187,12 @@ while true; do
     2) do_flatpak ;;
     3) do_zsh ;;
     4) do_codecs ;;
-    5) do_gaming ;;
+    5) install_alacritty_config ;;
     6) do_extras ;;
     7) do_brave_code ;;
     8) do_theme ;;
     9) do_all ;;
-    10) install_alacritty_config ;;
+    10) do_GPU_Driver_Nvidia ;;
     0) echo "Skript beendet. Viel Spaß mit Fedora KDE!" ; exit 0 ;;
   esac
 
