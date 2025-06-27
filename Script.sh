@@ -125,9 +125,6 @@ do_codecs() {
   sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
   echo "=> Ersetze ffmpeg-free durch volles ffmpeg"
   sudo dnf swap ffmpeg-free ffmpeg --allowerasing -y
-  echo "=> Multimedia-Gruppe aktualisieren (ohne schwache Abhängigkeiten)"
-  sudo dnf update -y @multimedia --setopt="install_weak_deps=False" \
-    --exclude=PackageKit-gstreamer-plugin
 }
 
 do_gaming() {
