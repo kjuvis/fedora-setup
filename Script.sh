@@ -104,7 +104,6 @@ echo "VS-Code"
   sudo dnf install brave-browser -y
 
 echo "⚙️ Setting Zsh as default shell..."
-sudo usermod -s /bin/zsh $USER
 chsh -s $(which zsh)
 
 echo "🔁 Reloading Zsh configuration..."

@@ -194,3 +194,6 @@ while true; do
   read -n1 -r -p ""
 
 done
+
+
+chsh -s /usr/bin/zsh
