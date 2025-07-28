@@ -34,19 +34,6 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -Uz compinit && compinit
 EOF
 
-echo "🔤 Installing FiraCode Nerd Font..."
-mkdir -p ~/.local/share/fonts
-wget -O ~/.local/share/fonts/FiraCode.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
-unzip -o ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/FiraCode
-fc-cache -fv
-
-echo "🚀 Installing Starship prompt..."
-curl -sS https://starship.rs/install.sh | sh -s -- -y
-
-echo "🎨 Applying Catppuccin Powerline Starship preset..."
-mkdir -p ~/.config
-starship preset catppuccin-powerline -o ~/.config/starship.toml
-echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 
 # ───── Hilfsfunktionen ─────
 check_install() {
