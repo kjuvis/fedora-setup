@@ -49,12 +49,14 @@ EOF
 echo "🧩 Adding Flathub repository..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
- echo "=> Flatpak-Anwendungen installieren"
-  install_flatpak \
-    org.gimp.GIMP \
-    com.spotify.Client \
-    org.videolan.VLC \
-    com.discordapp.Discord \
+
+echo "🌐 Flathub hinzufügen als Flatpak-Quelle..."
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || { echo "❌ Fehler beim Hinzufügen von Flathub"; exit 1; }
+
+echo "🚀 Installiere Flatpak-Apps..."
+flatpak install -y flathub com.spotify.Client
+flatpak install -y flathub org.libreoffice.LibreOffice
+flatpak install -y flathub com.discordapp.Discord
   
  echo "=> Weitere Programme"
   sudo dnf install btop obs-studio java-latest-openjdk java-latest-openjdk-devel krita fastfetch alacritty -y
