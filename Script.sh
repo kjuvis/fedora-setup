@@ -59,9 +59,6 @@ sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=Package
 echo "🛠️ Installing Git and Zsh..."
 sudo dnf install git zsh -y
 
-echo "⚙️ Setting Zsh as default shell..."
-chsh -s $(which zsh)
-
 echo "💡 Preparing Zsh plugins..."
 touch ~/.zshrc
 mkdir -p ~/.zsh/plugins
@@ -107,6 +104,8 @@ echo "VS-Code"
   sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo -y
   sudo dnf install brave-browser -y
 
+echo "⚙️ Setting Zsh as default shell..."
+chsh -s $(which zsh)
 
 echo "🔁 Reloading Zsh configuration..."
 exec zsh
