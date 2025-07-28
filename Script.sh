@@ -51,12 +51,10 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 
  echo "=> Flatpak-Anwendungen installieren"
   install_flatpak \
-    com.github.tchx84.Flatseal \
     org.gimp.GIMP \
     com.spotify.Client \
     org.videolan.VLC \
     com.discordapp.Discord \
-    com.github.IsmaelMartinez.teams_for_linux
   
  echo "=> Weitere Programme"
   sudo dnf install btop obs-studio java-latest-openjdk java-latest-openjdk-devel krita fastfetch alacritty -y
