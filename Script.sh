@@ -79,6 +79,11 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -Uz compinit && compinit
 EOF
 
+echo "=> Installiere Alacritty-Konfiguration..."
+  mkdir -p ~/.config/alacritty
+  cp ./config/alacritty/alacritty.toml ~/.config/alacritty/
+  echo "✓ Alacritty-Konfiguration kopiert."
+
 echo "🧩 Adding Flathub repository..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
