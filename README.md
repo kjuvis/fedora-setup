@@ -1,48 +1,35 @@
-# Fedora Setup
+# 🐧 Fedora Setup
 
-This repository contains scripts and configurations for quickly setting up a Fedora system according to personal preferences.
+**Fedora Post-Install Script – automatischer System‑Setup für Fedora Workstation**
 
-## Contents
+---
 
-- Automated installation scripts  
-- Configuration files for common tools and applications  
-- Instructions for usage and customization
+## 🧰 Beschreibung
 
-## Requirements
+Dieses Repository enthält Skripte und Konfigurationsdateien, um ein frisch installiertes Fedora‑System nach deinen persönlichen Anforderungen automatisch einzurichten.
 
-- A fresh Fedora system (ideally Fedora Workstation)  
-- Terminal access with sudo privileges  
-- Basic command-line knowledge
+---
 
-## Installation and Usage
+## 📁 Inhalt & Struktur
 
-1. Clone the repository:
+- `setup.sh`: Hauptinstallationsskript  
+- `config/`: Konfigurationsdateien für Terminal, Shell (z. B. Alacritty, Zsh)  
+- Weitere Module oder Ordner für spezifische Tools oder Apps  
 
-   git clone https://github.com/kjuvis/fedora-setup.git  
-   cd fedora-setup
+---
 
-2. Run the main setup script:
+## ✅ Voraussetzungen
 
-   sudo sh Script.sh
+- Vorinstalliertes Fedora (Workstation empfohlen)  
+- Terminalzugriff mit **sudo**‑Rechten  
+- Grundkenntnisse im Umgang mit der Shell  
 
-3. Follow the on-screen instructions. The scripts will automatically install and configure various packages and settings.
+---
 
-## What gets installed?
+## 🛠️ Installation & Nutzung
 
-- Installation of essential packages and tools  
-- System and user configurations (e.g., dotfiles, shell setup)  
-- Desktop environment customizations  
-- Other useful settings for an optimal Fedora experience
-
-## Customization
-
-The scripts can be modified as needed to add more software or change settings. Check the individual scripts and configuration files for details.
-
-## Contributing
-
-Contributions and improvements are welcome! Feel free to open issues or pull requests if you have suggestions or find bugs.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).# fedora-setup
-Fedora Post Install Script
+```bash
+git clone https://github.com/kjuvis/fedora-setup.git
+cd fedora-setup
+chmod +x setup.sh  # falls nötig
+./setup.sh
