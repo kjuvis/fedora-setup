@@ -116,5 +116,3 @@ echo "VS-Code"
 echo "⚙️ Setting Zsh as default shell..."
 chsh -s $(which zsh)
 
-echo "🔁 Reloading Zsh configuration..."
-exec zsh
