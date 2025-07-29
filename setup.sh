@@ -64,7 +64,7 @@ touch ~/.zshrc
 mkdir -p ~/.zsh/plugins
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/plugins/zsh-syntax-highlighting
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-completions ~/.zsh/plugins/zsh-completions
 
 echo "📜 Updating .zshrc with plugin configuration..."
@@ -75,9 +75,10 @@ fpath+=~/.zsh/plugins/zsh-completions
 
 # Load Plugins
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -Uz compinit && compinit
 EOF
+
+#source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 echo "=> Installiere Alacritty-Konfiguration..."
   mkdir -p ~/.config/alacritty
@@ -100,9 +101,17 @@ echo "🚀 Installiere Flatpak-Apps..."
 flatpak install -y flathub com.spotify.Client
 flatpak install -y flathub org.libreoffice.LibreOffice
 flatpak install -y flathub com.discordapp.Discord
+
+echo "Snapd wird installiert"
+sudo dnf install snapd -y
+sudo ln -s /var/lib/snapd/snap /snap || true
+sudo systemctl enable --now snapd.socket
+
+sudo snap install obsidian --classic
+sudo dnf install -y protonvpn-cli
   
  echo "=> Weitere Programme"
-  sudo dnf install btop obs-studio java-latest-openjdk java-latest-openjdk-devel krita fastfetch alacritty -y
+  sudo dnf install btop obs-studio java-latest-openjdk java-latest-openjdk-devel krita fastfetch alacritty vlc -y
 
 echo "VS-Code"
   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc 
@@ -112,6 +121,25 @@ echo "VS-Code"
   sudo dnf install dnf-plugins-core -y
   sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo -y
   sudo dnf install brave-browser -y
+
+echo "Look and Feel"
+lookandfeeltool -a org.kde.breezedark.desktop
+plasma-apply-colorscheme BreezeDark
+
+xdg-settings get default-web-browser
+xdg-mime default brave-browser.desktop x-scheme-handler/http
+xdg-mime default brave-browser.desktop x-scheme-handler/https
+
+xdg-mime default vlc.desktop video/x-matroska
+xdg-mime default vlc.desktop video/mp4
+xdg-mime default vlc.desktop video/x-msvideo
+xdg-mime default vlc.desktop audio/mpeg
+xdg-mime default vlc.desktop audio/x-wav
+xdg-mime default vlc.desktop audio/x-flac
+xdg-mime default vlc.desktop audio/ogg
+xdg-mime default vlc.desktop audio/mp4
+xdg-mime default vlc.desktop application/ogg
+
 
 echo "⚙️ Setting Zsh as default shell..."
 chsh -s $(which zsh)
