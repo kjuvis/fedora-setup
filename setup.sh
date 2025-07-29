@@ -80,6 +80,9 @@ EOF
 
 #source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
 echo "=> Installiere Alacritty-Konfiguration..."
   mkdir -p ~/.config/alacritty
   cp ./config/alacritty/alacritty.toml ~/.config/alacritty/
@@ -89,6 +92,11 @@ echo "=> Installiere Fastfetch-Konfiguration..."
   mkdir -p ~/.config/fastfetch
   cp ./config/fastfetch/config.jsonc ~/.config/fastfetch/
   echo "✓ Fastfetch-Konfiguration kopiert."
+
+echo "=> zsh config"
+ cp ./config/zsh/.zshrc ~/
+ cp ./config/zsh/.p10k.zsh ~/
+ echo "fertig"
 
 echo "🧩 Adding Flathub repository..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
