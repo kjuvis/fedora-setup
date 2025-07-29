@@ -1,0 +1,65 @@
+// Inspired by Catnap
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "small"
+    },
+    "display": {
+        "separator": "",
+        "key": {
+            "width": 14
+        }
+    },
+    "modules": [
+        {
+            // draw borders first to make colors of left and right border consistant
+            "key": " user",
+            "type": "title",
+            "format": "{user-name}",
+            "keyColor": "#bfc1ff"
+        },
+        {
+            "key": "󰇅 hname",
+            "type": "title",
+            "format": "{host-name}",
+            "keyColor": "#a7abde"
+
+        },
+        {
+            "key": "{icon} distro",
+            "type": "os",
+            "keyColor": "#a4abd7"
+        },
+        {
+            "key": " kernel",
+            "type": "kernel",
+            "keyColor": "#939ee7"
+        },
+        {
+            "key": "󰇄 desktop",
+            "type": "de",
+            "keyColor": "36"
+        },
+        {
+            "key": " term",
+            "type": "terminal",
+            "keyColor": "#5f73ee"
+        },
+        {
+            "key": " shell",
+            "type": "shell",
+            "keyColor": "#323c7f"
+        },
+        {
+            "key": "󰍛 cpu",
+            "type": "cpu",
+            "showPeCoreCount": true,
+            "keyColor": "#444a6e"
+        },
+        {
+            "key": " memory",
+            "type": "memory",
+            "keyColor": "#555766"
+        }
+    ]
+}

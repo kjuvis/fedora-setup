@@ -84,6 +84,11 @@ echo "=> Installiere Alacritty-Konfiguration..."
   cp ./config/alacritty/alacritty.toml ~/.config/alacritty/
   echo "✓ Alacritty-Konfiguration kopiert."
 
+echo "=> Installiere Fastfetch-Konfiguration..."
+  mkdir -p ~/.config/fastfetch
+  cp ./config/fastfetch/config.jsonc ~/.config/fastfetch/
+  echo "✓ Fastfetch-Konfiguration kopiert."
+
 echo "🧩 Adding Flathub repository..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
